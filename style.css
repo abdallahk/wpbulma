@@ -13,9 +13,24 @@ Text Domain: wpbulma
 
 
 /*Custom*/
-:not(.navbar).container {
-    padding: 0 15px !important;
+
+.widget_recent_entries li, .widget_archive li, .widget_meta li {
+    line-height: 2em;
+    border-bottom: 1px solid whitesmoke;
 }
+
+/* Widget Area */
+.sidebar.widget-area li {
+    list-style: none;
+}
+.sidebar.widget-area .widget{
+    margin-bottom: 1em;
+}
+.sidebar .widget.widget_search {
+    background: whitesmoke;
+    padding: 1em;
+}
+
 
 
 /* Default Styles */
@@ -102,10 +117,7 @@ label{
 
 
 
-/* Widget Area */
-.widget-area li {
-    list-style: none;
-}
+
 
 
 /* Typography */

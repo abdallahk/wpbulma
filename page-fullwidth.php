@@ -1,5 +1,5 @@
 <?php 
-/* Template Name: Home Full-width */
+/* Template Name: Full-width Page*/
 ?>
 
 <?php get_header();?>

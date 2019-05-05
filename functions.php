@@ -1,4 +1,6 @@
 <?php
+add_image_size( 'thumbnail_300', 300, 300, true );
+
 
 add_theme_support( 'title-tag' );
 add_theme_support( 'custom-logo', array(
@@ -101,28 +103,11 @@ function create_topbar_menu( $theme_location ) {
 
 include 'includes/customizer.php';
 include 'includes/breadcrumb.php';
+include 'includes/comment-walker.php';
 
 
 
-function get_breadcrumb() {
-    echo '<a href="'.home_url().'" rel="nofollow">Home</a>';
-    if (is_category() || is_single()) {
-        echo "&nbsp;&nbsp;&#187;&nbsp;&nbsp;";
-        the_category(' &bull; ');
-            if (is_single()) {
-                echo " &nbsp;&nbsp;&#187;&nbsp;&nbsp; ";
-                the_title();
-            }
-    } elseif (is_page()) {
-        echo "&nbsp;&nbsp;&#187;&nbsp;&nbsp;";
-        echo the_title();
-    } elseif (is_search()) {
-        echo "&nbsp;&nbsp;&#187;&nbsp;&nbsp;Search Results for... ";
-        echo '"<em>';
-        echo the_search_query();
-        echo '</em>"';
-    }
-}
+
 
 
 
@@ -183,8 +168,8 @@ function theme_sidebar() {
         'name' => __( 'Main Sidebar', 'wpbulma' ),
         'id' => 'sidebar-1',
         'description' => __( 'Widgets in this area will be shown on all posts and pages.', 'wpbulma' ),
-        'before_widget' => '<li id="%1$s" class="widget %2$s">',
-    'after_widget'  => '</li>',
+        'before_widget' => '<div id="%1$s" class="widget %2$s">',
+    'after_widget'  => '</div>',
     'before_title'  => '<h3 class="widgettitle">',
     'after_title'   => '</h3>',
     ) );
@@ -258,3 +243,77 @@ function adding_custom_meta_boxes_block( $post_type, $post ) {
     );
 }
 add_action( 'add_meta_boxes', 'adding_custom_meta_boxes_block', 10, 2 );
+
+
+
+
+/**
+ * Displays the pagination on the homepage.
+ *
+ * @since 0.1.0
+ *
+ * @global $wp_query
+ */
+
+function bulmawp_pagination() {
+    if( is_singular() ) {
+        return;
+    }
+    global $wp_query;
+    if( $wp_query->max_num_pages <= 1 ) {
+        return;
+    }
+    $paged = get_query_var( 'paged' ) ? absint( get_query_var( 'paged' ) ) : 1;
+    $max = intval( $wp_query->max_num_pages );
+    if( $paged >= 1 ) {
+        $links[] = $paged;
+    }
+    if( $paged >= 3 ) {
+        $links[] = $paged - 1;
+    }
+    if( ( $paged + 2 ) <= $max ) {
+        $links[] = $paged + 1;
+    }
+    echo '<nav class="pagination is-centered" role="navigation" aria-label="pagination">';
+    if( get_previous_posts_link() ) {
+        printf( '%s', get_previous_posts_link( 'Previous' ) );
+    }
+    if( get_next_posts_link() ) {
+        printf( '%s', get_next_posts_link( 'Next' ) );
+    }
+    echo '<ul class="pagination-list">';
+    if( ! in_array( 1, $links ) ) {
+        $class = 1 == $paged ? ' is-current' : '';
+        $aria_current = 1 == $paged ? ' aria-current="page"' : '';
+        printf( '<li><a href="%s" class="pagination-link%s" aria-label="Go to page 1"%s>%s</a></li>', esc_url( get_pagenum_link( 1 ) ), $class, $aria_current, '1' );
+        if( ! in_array( 2, $links ) ) {
+            echo '<li><span class="pagination-ellipsis">&hellip;</span></li>' . "\n";
+        }
+    }
+    sort( $links );
+    foreach( ( array ) $links as $link ) {
+        $class = $paged == $link ? ' is-current' : '';
+        $aria_current = $paged == $link ? ' aria-current="page"' : '';
+        printf( '<li><a href="%s" class="pagination-link%s" aria-label="Go to page %s"%s>%s</a></li>', esc_url( get_pagenum_link( $link ) ), $class, $link, $aria_current, $link );
+    }
+    if( ! in_array( $max, $links ) ) {
+        if( ! in_array( $max - 1, $links ) ) {
+            echo '<li><span class="pagination-ellipsis">&hellip;</span></li>' . "\n";
+        }
+        $class = $paged == $max ? ' is-current' : '';
+        $aria_current = $paged == $max ? ' aria-current="page"' : '';
+        printf( '<li><a href="%s" class="pagination-link%s" aria-label="Goto page %s"%s>%s</a></li>', esc_url( get_pagenum_link( $max ) ), $class, $max, $aria_current, $max );
+    }
+    echo '</ul></nav>';
+ }
+
+ add_filter( 'next_posts_link_attributes', 'bulmawp_next_posts_link_class' );
+ add_filter( 'previous_posts_link_attributes', 'bulmawp_previous_posts_link_class' );
+
+ function bulmawp_next_posts_link_class() {
+    return 'class="pagination-next"';
+ }
+
+ function bulmawp_previous_posts_link_class() {
+    return 'class="pagination-previous"';
+ }

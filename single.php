@@ -36,7 +36,7 @@
 
 
   <div class="column">
-    <div class="widget-area">
+    <div class="sidebar widget-area">
         <?php dynamic_sidebar( 'sidebar-1' ); ?>
     </div><!-- .widget-area -->
   </div>
