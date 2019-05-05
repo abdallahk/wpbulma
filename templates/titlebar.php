@@ -1,6 +1,6 @@
 <?php if (!is_front_page()) { ?>
 
-  <section class="hero <?=get_theme_mod( 'titlebar_color' )?> <?=get_theme_mod( 'titlebar_size' )?>">
+  <section class="hero <?php if(get_theme_mod( 'titlebar_color' ) != ""){ echo get_theme_mod( 'titlebar_color' ); } else { echo "is-primary"; }?> <?=get_theme_mod( 'titlebar_size' )?>">
   <!-- Hero head: will stick at the top -->
   <div class="hero-head">
   </div>

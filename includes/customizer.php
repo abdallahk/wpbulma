@@ -4,19 +4,25 @@ add_action('customize_register', 'theme_copyright_customizer');
 
 function theme_copyright_customizer($wp_customize) {
     //adding section in wordpress customizer   
-  $wp_customize->add_section('copyright_extras_section', array(
+  $wp_customize->add_section('footer_copyright_section', array(
     'title'   => 'Copyright Text Section'
   ));
 
     //adding setting for copyright text
-  $wp_customize->add_setting('text_setting', array(
-    'default' => 'Default Text For copyright Section',
+  $wp_customize->add_setting('footer_copyright_text', array(
+    'default' => '<p>
+      <strong>Bulma</strong> by <a href="https://jgthms.com" class="customize-unpreviewable">Jeremy Thomas</a>. The source code is licensed
+      <a href="http://opensource.org/licenses/mit-license.php" class="customize-unpreviewable">MIT</a>. The website content
+      is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" class="customize-unpreviewable">CC BY NC SA 4.0</a>.
+    </p>',
+    'transport' => 'refresh',
+
   ));
 
-  $wp_customize->add_control('text_setting', array(
+  $wp_customize->add_control('footer_copyright_text', array(
     'label'   => 'Copyright text',
-    'section' => 'copyright_extras_section',
-    'type'    => 'text',
+    'section' => 'footer_copyright_section',
+    'type'    => 'textarea',
   ));
 }
 
