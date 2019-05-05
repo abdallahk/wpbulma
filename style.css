@@ -31,6 +31,10 @@ Text Domain: wpbulma
     padding: 1em;
 }
 
+.navbar-link.is-active, .navbar-link:hover, a.navbar-item.is-active, a.navbar-item:hover {
+    background-color: #fafafa !important;
+}
+
 
 
 /* Default Styles */

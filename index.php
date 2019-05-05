@@ -4,8 +4,6 @@ $page_for_posts_id = get_option('page_for_posts');
 
 ?>
 
-
-
   <section class="hero <?php if(get_theme_mod( 'titlebar_color' ) != ""){ echo get_theme_mod( 'titlebar_color' ); } else { echo "is-primary"; }?> <?=get_theme_mod( 'titlebar_size' )?>">
   <!-- Hero head: will stick at the top -->
   <div class="hero-head">
@@ -43,13 +41,11 @@ $page_for_posts_id = get_option('page_for_posts');
           $myposts = get_posts( $args );
           foreach ( $myposts as $post ) : setup_postdata( $post ); ?>
 
-
-
             <article class="media">
               <div class="columns">
                 <div class="column is-3">
                   <figure class="media-left">
-                    <p class="image is-512x512">
+                    <p class="image">
                       <a href="<?php the_permalink(); ?>"><?=the_post_thumbnail('thumbnail_300');?></a>
                     </p>
                   </figure>

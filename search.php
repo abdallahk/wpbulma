@@ -60,7 +60,7 @@
 </div>
 
 <div class="column is-one-quarter">
-    <div class="widget-area">
+    <div class="widget-area sidebar">
       <?php dynamic_sidebar( 'sidebar-1' ); ?>
   </div><!-- .widget-area -->
 </div>
