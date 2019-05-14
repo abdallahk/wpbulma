@@ -24,6 +24,18 @@
 						<small class="tags"><?php the_tags( '<div class="tags"><code title="tags" class="tag is-danger"><i class="fas fa-tags"></i>&nbsp;Tags: </code><span class="tag">', '</span><span class="tag">', '</span></div>' ); ?></small>
 						<hr>
 
+						<div class="columns">
+							<div class="column is-half">
+								<?php previous_post_link( '<small class="is-size-7 is-family-monospace has-text-grey">Previous Post</small><br><p><i class="fas fa-chevron-left"></i> %link</p>' ); ?>
+							</div>
+
+							<div class="column is-half has-text-right">								
+								<?php next_post_link( '<small class="is-size-7 is-family-monospace has-text-grey">Next Post</small><br><p>%link <i class="fas fa-chevron-right"></i></p>' ); ?>
+							</div>
+						</div>
+	 
+						<hr>
+
 						<?php comments_template(); ?>
 
 					<?php endwhile; ?>

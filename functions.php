@@ -98,7 +98,8 @@ function get_block_data($atts){
 	$block_data = get_post($a['id']);
 
     if(current_user_can('edit_pages')){
-        return apply_filters('the_content', $block_data->post_content)."<small><a href='/wp-admin/post.php?post=". $atts['id'] ."&action=edit'>[Edit this block]</a></small>";
+        $data = apply_filters('the_content', $block_data->post_content);
+        return "<div class='bordered-block'>" . $data ."<span class='block-edit-label'><a class='button is-small is-link is-outlined' href='/wp-admin/post.php?post=". $atts['id'] ."&action=edit'>Edit this block</a></span></div>";
     }
 	else{
 
