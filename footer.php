@@ -1,4 +1,4 @@
-<footer class="footer is-medium" style="padding: 1em;">
+<footer class="footer" style="padding: 2em;">
 	<div class="container">
 		<div class="columns">
 			<div class="column is-one-quarter"><?php dynamic_sidebar( 'footer-1' ); ?></div>

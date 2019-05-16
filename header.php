@@ -18,7 +18,7 @@
 </head>
 <body>
 
-  <nav class="navbar has-shadow" role="navigation" aria-label="main navigation">
+  <nav class="navbar has-shadow <?=get_theme_mod( 'navbar_size' )?>" role="navigation" aria-label="main navigation">
     <div class="container">
       <div class="navbar-brand">
         <a class="navbar-item" href="<?=get_bloginfo('url');?>">
@@ -45,35 +45,19 @@
 
          <?php create_topbar_menu( "topbar_menu" ) ?>
 
+
          <div class="navbar-end">
           <div class="navbar-item">
             <div class="buttons">
-              <?php 
 
-              $menuParameters = array(
-                'container'       => false,
-                'echo'            => false,
-                'items_wrap'      => '%3$s',
-                'depth'           => 0,
-                'menu'  => 'topbar_button_links',
-                'add_li_class'    => 'button'
-              );
+              <?php echo get_theme_mod( 'navbar_right_content' ); ?>
 
-              function add_additional_class_on_li($classes, $item, $args) {
-                if($args->add_li_class) {
-                  $classes[] = $args->add_li_class;
-                }
-                return $classes;
-              }
 
-              add_filter('nav_menu_css_class', 'add_additional_class_on_li', 1, 3);
-              
-              echo wp_nav_menu( $menuParameters );
-
-              ?>
             </div>
           </div>
         </div>
+
+
       </div>
     </div>
   </nav>

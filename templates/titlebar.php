@@ -1,14 +1,11 @@
 <?php if (!is_front_page()) { ?>
 
   <section class="hero <?php if(get_theme_mod( 'titlebar_color' ) != ""){ echo get_theme_mod( 'titlebar_color' ); } else { echo "is-primary"; }?> <?=get_theme_mod( 'titlebar_size' )?>">
+    
   <!-- Hero head: will stick at the top -->
   <div class="hero-head">
   </div>
 
-  <?php 
-  $crumbs = explode("/",$_SERVER["REQUEST_URI"]);
-  // print_r($crumbs);
-  ?>
 
   <!-- Hero content: will be in the middle -->
   <div class="hero-body">

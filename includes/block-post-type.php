@@ -3,7 +3,7 @@
 /**
  * Registers the block post type.
  */
-function wpt_block_post_type() {
+function wpbulma_block_post_type() {
     $labels = array(
         'name'               => __( 'Blocks' ),
         'singular_name'      => __( 'Block' ),
@@ -29,23 +29,23 @@ function wpt_block_post_type() {
         'rewrite'              => array( 'slug' => 'block' ),
         'has_archive'          => false,
         'menu_position'        => 30,
-        'menu_icon'            => 'dashicons-editor-table',
-        // 'register_meta_box_cb' => 'wpt_add_block_metaboxes',
+        'menu_icon'            => 'dashicons-editor-table'
     );
     register_post_type( 'block', $args );
 }
-add_action( 'init', 'wpt_block_post_type' );
+add_action( 'init', 'wpbulma_block_post_type' );
 
 
 
 
-
-// metabox for block shortcode
+/**
+ * Metabox for block shortcode
+ */
 function block_shortcode_meta_box() {
 
     add_meta_box(
         'wpbulma-block-shorcode',
-        __( 'Shortcode', 'wpbulma' ),
+        __( 'Block Shortcode', 'wpbulma' ),
         'block_shortcode_meta_box_callback',
         'block',
         'side',
@@ -63,12 +63,9 @@ add_action( 'add_meta_boxes', 'block_shortcode_meta_box' );
 
 
 
-
-
-
-
-
-
+/**
+ * Return Block Data on call
+ */
 function get_block_data($atts){
     $a = shortcode_atts( array(
       'id' => $atts['id']
@@ -86,3 +83,25 @@ function get_block_data($atts){
     }
 }
 add_shortcode( 'wp_bulma_block', 'get_block_data' );
+
+
+
+
+// add shortcode in blocks list page
+add_filter('manage_block_posts_columns', 'ST4_columns_block_head');
+add_action('manage_block_posts_custom_column', 'ST4_columns_block_content', 10, 2);
+
+// add two new columns
+function ST4_columns_block_head($defaults) {
+    $defaults['first_column']  = 'Shortcode';
+    return $defaults;
+}
+ 
+function ST4_columns_block_content($column_name, $post_ID) {
+    if ($column_name == 'first_column') {
+        echo '<code>[wp_bulma_block id="';
+        echo $post_ID;
+        echo '"]</code>';
+    }
+
+}
