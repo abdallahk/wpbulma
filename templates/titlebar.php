@@ -17,7 +17,8 @@
         <div class="column is-half"><h1 class="is-size-4 is-left is-paddingless is-marginless"><a href="<?php the_permalink(); ?>" rel="bookmark" title="Permanent Link to <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h1></div>
         <div class="column is-half" style="padding-top:1rem;">
           <nav class="breadcrumb is-right" aria-label="breadcrumbs">
-            <?php wordpress_breadcrumbs(); ?>
+
+            <?php if(get_theme_mod( 'titlebar_breadcrumb' )){ wordpress_breadcrumbs(); } ?>
             
             </nav>
           </div>          

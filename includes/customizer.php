@@ -98,5 +98,21 @@ function cd_customizer_settings_new( $wp_customize ) {
     ),
   ));
 
+  $wp_customize->add_setting( 'titlebar_breadcrumb', array(
+    'default'   => true,
+    'transport' => 'refresh',
+  ));
+
+  $wp_customize->add_control( 'titlebar_breadcrumb', array(
+    'label'     => 'Show Breadcrumb in Titlebar',
+    'section'   => 'titlebar_settings',
+    'settings'  => 'titlebar_breadcrumb',
+    'type'      => 'radio',
+    'choices'   => array(
+      true      => 'True',
+      false      => 'False',
+    ),
+  ));
+
 
 }

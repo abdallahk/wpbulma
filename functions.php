@@ -52,22 +52,21 @@ include 'includes/customizer.php';
 include 'includes/create-topbar-menu.php';
 include 'includes/breadcrumb.php';
 include 'includes/comment-walker.php';
+include 'includes/block-post-type.php';
 
 
 
 
 
-
-
-function codex_custom_init() {
-    $args = array(
-      'public' => true,
-      'menu_icon' => 'dashicons-editor-table',
-      'label'  => 'Page Blocks'
-    );
-    register_post_type( 'block', $args );
-}
-add_action( 'init', 'codex_custom_init' );
+// function codex_custom_init() {
+//     $args = array(
+//       'public' => true,
+//       'menu_icon' => 'dashicons-editor-table',
+//       'label'  => 'Page Blocks'
+//     );
+//     register_post_type( 'block', $args );
+// }
+// add_action( 'init', 'codex_custom_init' );
 
 
 add_filter('manage_block_posts_columns', 'ST4_columns_block_head');
@@ -87,26 +86,6 @@ function ST4_columns_block_content($column_name, $post_ID) {
     }
 
 }
-
-
-
-function get_block_data($atts){
-	$a = shortcode_atts( array(
-      'id' => $atts['id']
-   ), $atts );
-
-	$block_data = get_post($a['id']);
-
-    if(current_user_can('edit_pages')){
-        $data = apply_filters('the_content', $block_data->post_content);
-        return "<div class='bordered-block'>" . $data ."<span class='block-edit-label'><a class='button is-small is-link is-outlined' href='/wp-admin/post.php?post=". $atts['id'] ."&action=edit'>Edit this block</a></span></div>";
-    }
-	else{
-
-        return apply_filters('the_content', $block_data->post_content);
-    }
-}
-add_shortcode( 'wp_bulma_block', 'get_block_data' );
 
 
 
