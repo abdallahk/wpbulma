@@ -20,9 +20,9 @@ function bt_get_titlebar($title, $breadcrumb_array=[])
 
 // enqueue theme styles
 function my_theme_enqueue_styles() {
- 
+
+    wp_enqueue_style( 'bulma', get_template_directory_uri() . '/assets/styles/main.css' ); 
     wp_enqueue_style( 'wpbulma', get_template_directory_uri() . '/style.css' );
-    // wp_enqueue_style( 'bulma', get_template_directory_uri() . '/assets/styles/main.css' );
     wp_enqueue_script( 'script', get_template_directory_uri() . '/assets/scripts/main.js', array ( 'jquery' ), 1.1, true);
 
 }
