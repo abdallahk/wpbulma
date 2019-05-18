@@ -1,4 +1,4 @@
-# wp4wp
+# wpbulma
 
 ⚠ **Requires [Node](https://nodejs.org/en/) 8.5.0 or greater.**
 
