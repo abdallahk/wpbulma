@@ -40,9 +40,6 @@ function register_custom_nav_menus() {
 }
 
 
-
-
-
 // includes
 include 'includes/customizer.php';
 include 'includes/create-topbar-menu.php';

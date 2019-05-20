@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Webpack for WordPress.",
   "main": "index.js",
-  "author": "TheRuky",
-  "repository": "https://github.com/TheRuky/wp4wp",
+  "author": "abdallhk",
+  "repository": "https://github.com/abdallhk/wpbulma",
   "license": "MIT",
   "scripts": {
     "serve": "node compiler/serve",
